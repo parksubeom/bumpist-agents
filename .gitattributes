@@ -1,0 +1,3 @@
+# 작업 트리 줄바꿈을 OS와 무관하게 LF로 고정한다.
+# Windows(core.autocrlf=true)에서 rules.json을 다시 만들면 내용이 같아도 수정된 것으로 보이던 문제를 막는다.
+* text=auto eol=lf
