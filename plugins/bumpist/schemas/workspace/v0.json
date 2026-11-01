@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://parksubeom.github.io/bumpist-agents/schemas/workspace/v0.json",
+  "title": "Bumpist pipeline workspace (C4)",
+  "description": "Files the pipeline keeps in a service repository's .bumpist/ folder. brief.md and prd.md are Markdown with fixed headings; the JSON files are defined here.",
+  "type": "object",
+  "properties": {
+    "state": {
+      "$ref": "#/$defs/state"
+    },
+    "screens": {
+      "$ref": "#/$defs/screens"
+    },
+    "tasks": {
+      "$ref": "#/$defs/tasks"
+    },
+    "metrics": {
+      "$ref": "#/$defs/metrics"
+    }
+  },
+  "$defs": {
+    "stage": {
+      "enum": [
+        "brief",
+        "spec",
+        "design",
+        "scaffold",
+        "plan",
+        "build",
+        "verify",
+        "ship",
+        "retro",
+        "learn"
+      ]
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "stage",
+        "updatedAt"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "stage": {
+          "$ref": "#/$defs/stage"
+        },
+        "approvals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "stage",
+              "by",
+              "at"
+            ],
+            "properties": {
+              "stage": {
+                "$ref": "#/$defs/stage"
+              },
+              "by": {
+                "type": "string"
+              },
+              "at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "retries": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "screens": {
+      "type": "object",
+      "required": [
+        "profile",
+        "theme",
+        "screens"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "profile": {
+          "oneOf": [
+            {
+              "enum": [
+                "consumer",
+                "workspace"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "enum": [
+                  "consumer",
+                  "workspace"
+                ]
+              },
+              "description": "route prefix → profile"
+            }
+          ]
+        },
+        "theme": {
+          "type": "string"
+        },
+        "screens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "route",
+              "blocks",
+              "states"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "route": {
+                "type": "string"
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "blocks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "components": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "states": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "ready",
+                    "loading",
+                    "empty",
+                    "error",
+                    "forbidden"
+                  ]
+                },
+                "minItems": 1
+              },
+              "copy": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "entities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "C6 entity names this screen reads or writes"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tasks": {
+      "type": "object",
+      "required": [
+        "tasks"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "kind",
+              "title",
+              "done"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "screen",
+                  "api",
+                  "data",
+                  "infra"
+                ]
+              },
+              "title": {
+                "type": "string"
+              },
+              "screen": {
+                "type": "string"
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "acceptance": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "done": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "runs"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "startedAt"
+            ],
+            "properties": {
+              "startedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "firstPreviewAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "firstProductionAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "humanEdits": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "description": "screen id → edits by a person"
+              },
+              "defects14d": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "visualQa": {
+                "type": "object",
+                "properties": {
+                  "ai": {
+                    "type": "number"
+                  },
+                  "human": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

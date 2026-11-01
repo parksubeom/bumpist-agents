@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://parksubeom.github.io/bumpist-agents/schemas/data/v0.json",
+  "title": "Bumpist data and permissions model (C6)",
+  "description": "Entities, ownership and role permissions of a service. The backend kit turns this into migrations and row-level security policies; bumpist-ship tests that no user can reach another user's rows.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "tenancy",
+    "roles",
+    "entities"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "tenancy": {
+      "enum": [
+        "user",
+        "team"
+      ],
+      "description": "Who owns data: each user, or a team that users belong to"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "minItems": 1
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "fields",
+          "owner",
+          "access"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "type"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "type": {
+                  "enum": [
+                    "uuid",
+                    "text",
+                    "int",
+                    "numeric",
+                    "bool",
+                    "timestamptz",
+                    "date",
+                    "jsonb",
+                    "enum"
+                  ]
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "references": {
+                  "type": "string",
+                  "description": "entity.field"
+                },
+                "unique": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "description": "Field that holds the owning user or team id"
+          },
+          "access": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "read",
+                  "create",
+                  "update",
+                  "delete"
+                ]
+              }
+            },
+            "description": "role → allowed actions on rows the actor owns or belongs to. Rows owned by others are never reachable (DATA-001)."
+          },
+          "public": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "read"
+              ]
+            },
+            "description": "Anonymous access, e.g. a public profile page"
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Rows to generate for previews and tests"
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,7 +5,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "check:schemas": "node scripts/check-schemas.mjs bumpist-agents"
+    "check:schemas": "node scripts/check-schemas.mjs bumpist-agents",
+    "test": "node --test test/validate.test.mjs"
   },
   "packageManager": "pnpm@9.15.0"
 }

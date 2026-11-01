@@ -1,6 +1,6 @@
 {
   "name": "bumpist",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bumpist agent pipeline for building services on a design system, a rulebook and a CI layer.",
   "author": {
     "name": "parksubeom"
