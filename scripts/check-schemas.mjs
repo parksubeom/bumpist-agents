@@ -1,7 +1,7 @@
 // Validates that every schemas/**/*.json file is well-formed JSON Schema
 // with a $id under this repo's GitHub Pages URL. No dependencies.
 import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative, sep } from "node:path";
 
 const repo = process.argv[2];
 const base = `https://parksubeom.github.io/${repo}/schemas/`;
@@ -24,7 +24,8 @@ function check(p) {
     failed++;
     return;
   }
-  const rel = p.replace(/^schemas\//, "");
+  // POSIX separators so the $id comparison works on Windows too.
+  const rel = relative("schemas", p).split(sep).join("/");
   const problems = [];
   if (s.$schema !== "https://json-schema.org/draft/2020-12/schema") problems.push("$schema must be draft 2020-12");
   if (s.$id !== base + rel) problems.push(`$id must be ${base + rel}`);
