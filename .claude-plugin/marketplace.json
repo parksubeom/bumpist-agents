@@ -1,0 +1,22 @@
+{
+  "name": "bumpist-agents",
+  "owner": {
+    "name": "parksubeom",
+    "url": "https://github.com/parksubeom"
+  },
+  "description": "Bumpist Suite agent pipeline: from a one-line idea to a Vercel preview PR.",
+  "plugins": [
+    {
+      "name": "bumpist",
+      "source": "./plugins/bumpist",
+      "description": "The Bumpist pipeline: /bumpist:brief, /bumpist:spec, /bumpist:design, /bumpist:scaffold … (phase 0 ships /bumpist:brief).",
+      "category": "development",
+      "tags": [
+        "frontend",
+        "nextjs",
+        "design-system",
+        "pipeline"
+      ]
+    }
+  ]
+}

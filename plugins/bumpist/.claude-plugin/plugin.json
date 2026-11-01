@@ -1,0 +1,15 @@
+{
+  "name": "bumpist",
+  "version": "0.0.1",
+  "description": "Bumpist agent pipeline for building services on a design system, a rulebook and a CI layer.",
+  "author": {
+    "name": "parksubeom"
+  },
+  "homepage": "https://github.com/parksubeom/bumpist-agents",
+  "license": "MIT",
+  "keywords": [
+    "pipeline",
+    "frontend",
+    "design-system"
+  ]
+}
