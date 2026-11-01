@@ -9,7 +9,7 @@
     {
       "name": "bumpist",
       "source": "./plugins/bumpist",
-      "description": "The Bumpist pipeline: /bumpist:brief, /bumpist:spec, /bumpist:design, /bumpist:scaffold … (phase 0 ships /bumpist:brief).",
+      "description": "The Bumpist pipeline: /bumpist:brief, /bumpist:spec, /bumpist:design, /bumpist:scaffold … (available now: /bumpist:brief, /bumpist:spec).",
       "category": "development",
       "tags": [
         "frontend",

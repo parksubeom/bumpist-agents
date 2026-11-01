@@ -13,7 +13,7 @@
 아이디어 한 줄만 말하면, Claude Code가 정해진 순서대로 기획부터 미리보기 링크까지 만들어 줘요.
 
 > [!NOTE]
-> 지금은 v0이에요. 1단계 인터뷰(`/bumpist:brief`)만 쓸 수 있어요.
+> 지금은 v0이에요. 1단계 인터뷰(`/bumpist:brief`)와 2단계 기획(`/bumpist:spec`)을 쓸 수 있어요.
 
 ## 왜 필요한가요
 
@@ -46,6 +46,11 @@ bumpist-agents는 사람 팀처럼 순서를 지켜요. 단계마다 결과를 �
    ```
 
 3. 아이디어를 한 줄로 말하면 질문이 최대 다섯 개 와요. 답하면 `.bumpist/brief.md`가 생겨요.
+4. brief를 승인하면 기획을 시작해요. `.bumpist/prd.md`와 `.bumpist/data-model.json`이 생겨요.
+
+   ```
+   /bumpist:spec
+   ```
 
 > [!TIP]
 > 모르는 질문에는 "모르겠어요"라고 해도 괜찮아요. 지어내지 않고, 나중에 확인할 가설로 적어 둬요.
@@ -62,7 +67,7 @@ bumpist-agents는 사람 팀처럼 순서를 지켜요. 단계마다 결과를 �
 8. **내보내기**: 미리보기 링크를 붙여 PR을 올려요.
 9. **회고**: 다음 서비스를 위한 교훈을 남겨요.
 
-2번 다음, 3번 다음, 그리고 8번에서 머지하기 전에는 사람이 확인하고 넘어가요. 지금은 1번만 되고, 2번부터 4번까지는 v0.1, 5번부터 9번까지는 v0.5에 들어와요.
+2번 다음, 3번 다음, 그리고 8번에서 머지하기 전에는 사람이 확인하고 넘어가요. 지금은 1번과 2번이 되고, 3번과 4번은 v0.1, 5번부터 9번까지는 v0.5에 들어와요.
 
 <details>
 <summary>같은 흐름을 그림으로 보기</summary>
@@ -94,7 +99,7 @@ flowchart TD
 | 단계 | 명령 | 남기는 파일 | 나오는 버전 |
 | --- | --- | --- | --- |
 | 1 인터뷰 | `/bumpist:brief` | `brief.md` | 지금 |
-| 2 기획 | `/bumpist:spec` | `prd.md`, `data-model.json` | v0.1 |
+| 2 기획 | `/bumpist:spec` | `prd.md`, `data-model.json` | 지금 |
 | 3 화면 설계 | `/bumpist:design` | `screens.json` | v0.1 |
 | 4 세팅 | `/bumpist:scaffold` | 새 저장소 | v0.1 |
 | 5 작업 나누기 | `/bumpist:plan` | `tasks.json` | v0.5 |
