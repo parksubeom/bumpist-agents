@@ -1,7 +1,18 @@
-# bumpist-agents
+<h1 align="center"><img src="./assets/banner.svg" alt="bumpist-agents" width="100%"></h1>
+
+<p align="center">
+  <img alt="상태: v0" src="https://img.shields.io/badge/status-v0-4F46E5?style=flat-square">
+  <img alt="Claude Code 플러그인" src="https://img.shields.io/badge/Claude%20Code-plugin-4F46E5?style=flat-square">
+  <img alt="라이선스: MIT" src="https://img.shields.io/badge/license-MIT-555555?style=flat-square">
+</p>
+
+<p align="center">
+  <a href="#써-보기">써 보기</a> · <a href="#이렇게-진행돼요">진행 순서</a> · <a href="#이런-경우엔-안-맞아요">안 맞는 경우</a> · <a href="#bumpist-저장소">다른 저장소</a>
+</p>
 
 아이디어 한 줄만 말하면, Claude Code가 정해진 순서대로 기획부터 미리보기 링크까지 만들어 줘요.
 
+> [!NOTE]
 > 지금은 v0이에요. 1단계 인터뷰(`/bumpist:brief`)만 쓸 수 있어요.
 
 ## 왜 필요한가요
@@ -13,6 +24,31 @@ AI에게 "서비스 하나 만들어 줘"라고만 하면 이런 일이 생겨�
 - 대화가 끊기면 처음부터 다시 설명해야 해요.
 
 bumpist-agents는 사람 팀처럼 순서를 지켜요. 단계마다 결과를 파일로 남겨서, 중간에 끊겨도 그 자리부터 이어 가요.
+
+## 써 보기
+
+[Claude Code](https://claude.com/claude-code)가 있으면 바로 해 볼 수 있어요. 아래 명령은 터미널이 아니라 Claude Code 대화창에 입력해요.
+
+> [!IMPORTANT]
+> 새 서비스용 **빈 폴더**에서 Claude Code를 열어 주세요. 다른 프로젝트 폴더에서 열면 그 프로젝트에 `.bumpist/` 폴더가 섞여요.
+
+1. 플러그인을 설치해요.
+
+   ```
+   /plugin marketplace add parksubeom/bumpist-agents
+   /plugin install bumpist@bumpist-agents
+   ```
+
+2. 인터뷰를 시작해요.
+
+   ```
+   /bumpist:brief
+   ```
+
+3. 아이디어를 한 줄로 말하면 질문이 최대 다섯 개 와요. 답하면 `.bumpist/brief.md`가 생겨요.
+
+> [!TIP]
+> 모르는 질문에는 "모르겠어요"라고 해도 괜찮아요. 지어내지 않고, 나중에 확인할 가설로 적어 둬요.
 
 ## 이렇게 진행돼요
 
@@ -50,35 +86,6 @@ flowchart TD
 
 </details>
 
-## 써 보기
-
-[Claude Code](https://claude.com/claude-code)가 있으면 바로 해 볼 수 있어요. 아래 명령은 터미널이 아니라 Claude Code 대화창에 입력해요.
-
-1. 새 서비스용 빈 폴더를 만들고, 그 폴더에서 Claude Code를 열어요.
-   다른 프로젝트 폴더에서 열면 그 프로젝트에 `.bumpist/` 폴더가 섞여요.
-2. 플러그인을 설치해요.
-
-   ```
-   /plugin marketplace add parksubeom/bumpist-agents
-   /plugin install bumpist@bumpist-agents
-   ```
-
-3. 인터뷰를 시작해요.
-
-   ```
-   /bumpist:brief
-   ```
-
-아이디어를 한 줄로 말하면 질문이 최대 다섯 개 와요. 답하면 `.bumpist/brief.md`가 생겨요. 모르는 질문에는 "모르겠어요"라고 해도 괜찮아요. 지어내지 않고, 나중에 확인할 가설로 적어 둬요.
-
-## 이런 경우엔 안 맞아요
-
-- Claude Code를 쓰지 않아요.
-- Next.js가 아닌 프레임워크를 써요. 4단계 세팅이 Next.js 기준이에요.
-- 사람 확인 없이 끝까지 자동으로 돌리고 싶어요.
-
-## 더 알아보기
-
 <details>
 <summary>단계별 명령과 남기는 파일</summary>
 
@@ -98,6 +105,12 @@ flowchart TD
 | 10 배움 | `/bumpist:learn` | 다음 `brief.md` 초안 | v1.1 |
 
 </details>
+
+## 이런 경우엔 안 맞아요
+
+- Claude Code를 쓰지 않아요.
+- Next.js가 아닌 프레임워크를 써요. 4단계 세팅이 Next.js 기준이에요.
+- 사람 확인 없이 끝까지 자동으로 돌리고 싶어요.
 
 <details>
 <summary>다른 디자인 시스템과 함께 쓰기</summary>
