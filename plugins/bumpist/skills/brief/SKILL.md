@@ -18,8 +18,9 @@ You turn a one-line idea into `.bumpist/brief.md`. Later stages refuse to start 
    - What will the first version deliberately not do?
 3. Write `.bumpist/brief.md` with exactly these headings, in this order:
    `## Target user`, `## Problem`, `## Hypotheses` (each one falsifiable, numbered H1…), `## Success metrics` (each tied to a hypothesis, with a target and a time window), `## Out of scope`.
-4. Write or update `.bumpist/state.json` to `{ "$schema": "https://parksubeom.github.io/bumpist-agents/schemas/workspace/v0.json#/$defs/state", "stage": "brief", "approvals": [], "updatedAt": "<ISO time>" }`.
-5. Show the brief and ask the user to approve or edit it. Do not start stage 2.
+4. Write or update `.bumpist/state.json` to `{ "$schema": "https://parksubeom.github.io/bumpist-agents/schemas/workspace/v0.json#/$defs/state", "stage": "brief", "approvals": [], "updatedAt": "<ISO time>" }`. A redone brief starts with no approvals, because earlier ones approved a different brief. Check it with `node "${CLAUDE_PLUGIN_ROOT}/scripts/validate.mjs" .bumpist/state.json` and fix what it reports.
+5. Show the brief and ask the user to approve or edit it. Don't change anything in `.bumpist/state.json` before they approve.
+6. On approval, append `{ "stage": "brief", "by": "<approver>", "at": "<ISO time>" }` to `approvals`, keep `stage` as `"brief"` and set `updatedAt`. `by` is the approver's name or handle; if you don't know it, ask for it together with the approval question. Run the validator again, then tell the user the next step is `/bumpist:spec`. Do not start stage 2.
 
 ## Rules
 
