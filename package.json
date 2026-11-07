@@ -8,5 +8,5 @@
     "check:schemas": "node scripts/check-schemas.mjs bumpist-agents",
     "test": "node --test test/validate.test.mjs"
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@12.18.0"
 }
